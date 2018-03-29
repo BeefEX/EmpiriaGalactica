@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmpiriaGalactica {
+namespace EmpiriaGalactica.Controllers {
     public interface IController : IDisposable {
 
         void Update();

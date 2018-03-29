@@ -1,4 +1,4 @@
-﻿namespace EmpiriaGalactica {
+﻿namespace EmpiriaGalactica.Models {
     
     /// <summary>
     /// Used to indicate that a class is a model.

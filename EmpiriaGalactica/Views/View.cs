@@ -1,4 +1,8 @@
-﻿namespace EmpiriaGalactica {
+﻿using System;
+using EmpiriaGalactica.Controllers;
+using EmpiriaGalactica.Models;
+
+namespace EmpiriaGalactica.Views {
     
     /// <summary>
     /// Contains all logic related to rendering a single object.
@@ -30,6 +34,16 @@
             _controller = controller;
             _model = model;
         }
+
+        /// <summary>
+        /// Used to update the view.
+        /// </summary>
+        public abstract void Update();
+
+        /// <summary>
+        /// Used to dispose the view.
+        /// </summary>
+        public abstract void Dispose();
         
         #endregion
 
