@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpiriaGalactica", "EmpiriaGalactica\EmpiriaGalactica.csproj", "{E70EF1BF-DBD5-4646-A859-BA3587B54CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpiriaGalactica-CLI", "EmpiriaGalactica-CLI\EmpiriaGalactica-CLI.csproj", "{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E70EF1BF-DBD5-4646-A859-BA3587B54CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70EF1BF-DBD5-4646-A859-BA3587B54CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70EF1BF-DBD5-4646-A859-BA3587B54CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70EF1BF-DBD5-4646-A859-BA3587B54CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
