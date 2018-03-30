@@ -9,11 +9,11 @@ namespace EmpiriaGalactica.Controllers {
         
         #region Members
 
-        private Galaxy _galaxy;
+        private readonly Galaxy _galaxy;
         
-        private GalaxyView _galaxyView;
-        private GalaxyInfoView _galaxyInfoView;
-        private StarSystemInfoView _starSystemInfoView;
+        private readonly GalaxyView _galaxyView;
+        private readonly GalaxyInfoView _galaxyInfoView;
+        private readonly StarSystemInfoView _starSystemInfoView;
         
         #endregion
         
@@ -21,12 +21,15 @@ namespace EmpiriaGalactica.Controllers {
         
         public GalaxyViewController(Galaxy galaxy) {
             _galaxy = galaxy;
-
+            
             _galaxyView = new GalaxyView(this, _galaxy) {SelectedSystem = new Vector()};
 
             _galaxyInfoView = new GalaxyInfoView(this, _galaxy);
             
             _starSystemInfoView = new StarSystemInfoView(this, _galaxy.StarSystems[_galaxyView.SelectedSystem]);
+        }
+
+        public void Init() {
             
             EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
         }
@@ -68,10 +71,11 @@ namespace EmpiriaGalactica.Controllers {
                 _galaxyView.SelectedSystem.Y--;
             else if (e.Key == "DownArrow")
                 _galaxyView.SelectedSystem.Y++;
+            else if (e.Key == "Escape")
+                EmpiriaGalactica.GameController.PopBack();
             else if (e.Key == "Enter") {
                 EmpiriaGalactica.GameController.CurrentController =
                     new StarSystemViewController(_galaxy.StarSystems[_galaxyView.SelectedSystem]);
-                return;
             }
 
             _galaxyView.ForcedUpdate = false;

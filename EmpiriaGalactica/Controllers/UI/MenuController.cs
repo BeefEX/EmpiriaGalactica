@@ -18,7 +18,9 @@ namespace EmpiriaGalactica.Controllers.UI {
 
         public MenuController(Menu menu) {
             _view = new MenuView(this, menu);
-            
+        }
+
+        public void Init() {
             _selected = 0;
             _view.Model.Buttons[_selected].Selected = true;
             
@@ -43,6 +45,8 @@ namespace EmpiriaGalactica.Controllers.UI {
                 _selected--;
             else if (args.Key == "Enter")
                 _view.Model.Buttons[_selected].OnClick?.Invoke();
+            else if (args.Key == "Escape")
+                EmpiriaGalactica.GameController.PopBack();
 
             if (_selected < 0)
                 _selected += _view.Model.Buttons.Count;

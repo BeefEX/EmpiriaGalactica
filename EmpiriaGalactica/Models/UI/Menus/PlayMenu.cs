@@ -16,8 +16,7 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                 },
                 new Button {
                     Title = "Back",
-                    OnClick = () =>
-                        EmpiriaGalactica.GameController.CurrentController = new MenuController(new MainMenu())
+                    OnClick = () => EmpiriaGalactica.GameController.PopBack()
                 }
             });
         }

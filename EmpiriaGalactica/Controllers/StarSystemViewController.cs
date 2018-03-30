@@ -9,11 +9,11 @@ namespace EmpiriaGalactica.Controllers {
         
         #region Members
 
-        private StarSystem _starSystem;
+        private readonly StarSystem _starSystem;
         
         private readonly StarSystemView _starSystemView;
         private readonly StarSystemInfoView _starSystemInfoView;
-        private PlanetInfoView _planetInfoView;
+        private readonly PlanetInfoView _planetInfoView;
         
         #endregion
         
@@ -21,14 +21,14 @@ namespace EmpiriaGalactica.Controllers {
 
         public StarSystemViewController(StarSystem starSystem) {
             _starSystem = starSystem;
-            
-            _starSystemView = new StarSystemView(this, starSystem);
-            _starSystemInfoView = new StarSystemInfoView(this, starSystem);
+            _starSystemView = new StarSystemView(this, _starSystem);
+            _starSystemInfoView = new StarSystemInfoView(this, _starSystem);
             _planetInfoView = new PlanetInfoView(this, _starSystem.Planets[_starSystemView.SelectedPlanet]);
-            
-            EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
         }
 
+        public void Init() {
+            EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
+        }
 
         public void Update() {
             EmpiriaGalactica.Renderer.Clear(Color.Black);
@@ -51,6 +51,8 @@ namespace EmpiriaGalactica.Controllers {
         public void Dispose() {
             _starSystemView.Dispose();
             _starSystemInfoView.Dispose();
+
+            EmpiriaGalactica.Input.KeyDown -= InputOnKeyDown;
         }
 
         private void InputOnKeyDown(object sender, KeyboardArgs e) {
@@ -58,7 +60,11 @@ namespace EmpiriaGalactica.Controllers {
                 _starSystemView.SelectedPlanet--;
             else if (e.Key == "RightArrow")
                 _starSystemView.SelectedPlanet++;
-            
+            else if (e.Key == "Escape") {
+                EmpiriaGalactica.GameController.PopBack();
+                return;
+            }
+
             if (_starSystemView.SelectedPlanet < 0)
                 _starSystemView.SelectedPlanet += _starSystemView.Model.Planets.Count;
             
