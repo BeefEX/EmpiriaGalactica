@@ -28,6 +28,8 @@ namespace EmpiriaGalactica.Controllers {
 
         public void Init() {
             EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
+
+            _starSystemView.ForcedUpdate = true;
         }
 
         public void Update() {
@@ -60,7 +62,10 @@ namespace EmpiriaGalactica.Controllers {
                 _starSystemView.SelectedPlanet--;
             else if (e.Key == "RightArrow")
                 _starSystemView.SelectedPlanet++;
-            else if (e.Key == "Escape") {
+            else if (e.Key == "Enter") {
+                EmpiriaGalactica.GameController.CurrentController = new PlanetViewController(_starSystem.Planets[_starSystemView.SelectedPlanet]);
+                return;
+            } else if (e.Key == "Escape") {
                 EmpiriaGalactica.GameController.PopBack();
                 return;
             }

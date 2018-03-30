@@ -71,11 +71,13 @@ namespace EmpiriaGalactica.Controllers {
                 _galaxyView.SelectedSystem.Y--;
             else if (e.Key == "DownArrow")
                 _galaxyView.SelectedSystem.Y++;
-            else if (e.Key == "Escape")
+            else if (e.Key == "Escape") {
                 EmpiriaGalactica.GameController.PopBack();
-            else if (e.Key == "Enter") {
+                return;
+            } else if (e.Key == "Enter") {
                 EmpiriaGalactica.GameController.CurrentController =
                     new StarSystemViewController(_galaxy.StarSystems[_galaxyView.SelectedSystem]);
+                return;
             }
 
             _galaxyView.ForcedUpdate = false;

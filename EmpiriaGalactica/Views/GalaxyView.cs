@@ -28,17 +28,26 @@ namespace EmpiriaGalactica.Views {
             
             if (_cachedSelectedSystem == null || ForcedUpdate)
                 DrawInitial();
-            else {
-                renderer.PrintText("   ", Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3), HorizontalAlign.Left, Color.White, Color.Black);
-                renderer.PrintText(" * ", Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3 + 1), HorizontalAlign.Left, Color.White, Color.Black);
-                renderer.PrintText("   ", Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3 + 2), HorizontalAlign.Left, Color.White, Color.Black);
-                
-                renderer.PrintText("/-\\", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3), HorizontalAlign.Left, Color.Green, Color.Black);
-                renderer.PrintText("|*|", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3 + 1), HorizontalAlign.Left, Color.Green, Color.Black);
-                renderer.PrintText("\\_/", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3 + 2), HorizontalAlign.Left, Color.Green, Color.Black);
+            if (_cachedSelectedSystem != null) {
+                renderer.PrintText("   ", Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3),
+                    HorizontalAlign.Left, Color.White, Color.Black);
+                renderer.PrintText(" * ",
+                    Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3 + 1),
+                    HorizontalAlign.Left, Color.White, Color.Black);
+                renderer.PrintText("   ",
+                    Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3 + 2),
+                    HorizontalAlign.Left, Color.White, Color.Black);
             }
 
             _cachedSelectedSystem = new Vector(SelectedSystem.X, SelectedSystem.Y);
+            
+            
+            renderer.PrintText("/-\\", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3),
+                HorizontalAlign.Left, Color.Green, Color.Black);
+            renderer.PrintText("|*|", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3 + 1),
+                HorizontalAlign.Left, Color.Green, Color.Black);
+            renderer.PrintText("\\_/", Top + new Vector(SelectedSystem.X * 6, SelectedSystem.Y * 3 + 2),
+                HorizontalAlign.Left, Color.Green, Color.Black);
         }
 
         private void DrawInitial() {
@@ -51,7 +60,8 @@ namespace EmpiriaGalactica.Views {
                     if (x == SelectedSystem.X && y == SelectedSystem.Y)
                         color = Color.Green;
                     
-                    renderer.PrintText(" * ", Top + new Vector(x * 6, y * 3 + 1), HorizontalAlign.Left, color, Color.Black);
+                    renderer.PrintText(" * ", Top + new Vector(x * 6, y * 3 + 1), HorizontalAlign.Left, color,
+                        Color.Black);
                 }
             }
         }

@@ -50,7 +50,11 @@ namespace EmpiriaGalactica.Managers {
         /// <param name="i">The name of the item to retrieve.</param>
         public T this[string i] => _registeredItems[i];
 
+        /// <summary>
+        /// All the items registered.
+        /// </summary>
+        public Dictionary<string, T>.ValueCollection RegisteredItems => _registeredItems.Values;
+
         #endregion
-        
     }
 }

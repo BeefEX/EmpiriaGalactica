@@ -29,27 +29,24 @@ namespace EmpiriaGalactica.Views {
             5,
             3
         };
-
-        private bool _initalDrawDone;
-
-        private int _cachedSelectedPlanet;
+        
+        private int _cachedSelectedPlanet = -1;
         
         #endregion
         
         #region Methods
 
         public StarSystemView(IController controller, StarSystem model) : base(controller, model) {
-            _initalDrawDone = false;
         }
         
         public override void Update() {
-            if (!_initalDrawDone) {
+            if (_cachedSelectedPlanet == -1 || ForcedUpdate) {
                 InitalDraw();
-                _initalDrawDone = true;
             } else {
                 UpdateDraw();
             }
 
+            ForcedUpdate = false;
             _cachedSelectedPlanet = SelectedPlanet;
         }
 
@@ -57,13 +54,17 @@ namespace EmpiriaGalactica.Views {
             var size = Bottom - Top;
             var renderer = EmpiriaGalactica.Renderer;
             
-            var cachedPosition = new Vector(10 + (size.X - 20) / Model.Planets.Count * _cachedSelectedPlanet, size.Y / 2);
+            var cachedPosition =
+                new Vector(10 + (size.X - 20) / Model.Planets.Count * _cachedSelectedPlanet, size.Y / 2);
             
-            renderer.DrawRect(Top + cachedPosition - new Vector(4, 3), Top + cachedPosition + new Vector(5, 4), false, Color.White, Color.Black);
+            if (_cachedSelectedPlanet != -1)
+                renderer.DrawRect(Top + cachedPosition - new Vector(4, 3), Top + cachedPosition + new Vector(5, 4),
+                    false, Color.White, Color.Black);
             
             var newPosition = new Vector(10 + (size.X - 20) / Model.Planets.Count * SelectedPlanet, size.Y / 2);
             
-            renderer.DrawRect(Top + newPosition - new Vector(4, 3), Top + newPosition + new Vector(5, 4), false, Color.White, Color.White);
+            renderer.DrawRect(Top + newPosition - new Vector(4, 3), Top + newPosition + new Vector(5, 4), false,
+                Color.White, Color.White);
         }
         
         private void InitalDraw() {
@@ -97,7 +98,8 @@ namespace EmpiriaGalactica.Views {
                 if (SelectedPlanet != i)
                     continue;
                 
-                renderer.DrawRect(Top + position - new Vector(4, 3), Top + position + new Vector(5, 4), false, Color.White, Color.White);
+                renderer.DrawRect(Top + position - new Vector(4, 3), Top + position + new Vector(5, 4), false,
+                    Color.White, Color.White);
             }
         }
 
@@ -110,6 +112,8 @@ namespace EmpiriaGalactica.Views {
         #region Properties
         
         public int SelectedPlanet { get; set; }
+        
+        public bool ForcedUpdate { get; set; }
         
         #endregion
     }

@@ -15,10 +15,14 @@ namespace EmpiriaGalactica {
                 return null;
 
             // ReSharper disable once ConvertIfStatementToReturnStatement -- would be too long
-            if (!EmpiriaGalactica.PrototypeManager.Contains((string) reader.Value))
-                return null;
+            // ReSharper disable once InvertIf
+            if (!EmpiriaGalactica.Buildings.Contains((string) reader.Value))
+                if (!EmpiriaGalactica.Resources.Contains((string) reader.Value))
+                    return null;
+                else
+                    return EmpiriaGalactica.Resources[(string) reader.Value];
             
-            return EmpiriaGalactica.PrototypeManager[(string) reader.Value];
+            return EmpiriaGalactica.Buildings[(string) reader.Value];
         }
 
         public override bool CanConvert(Type objectType) {

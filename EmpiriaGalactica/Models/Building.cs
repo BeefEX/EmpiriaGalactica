@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EmpiriaGalactica.Models {
-    public abstract class Building : IModel, IInternalName {
+    public class Building : IModel, IInternalName {
         
         /// <summary>
         /// The name of this building.
@@ -21,7 +22,6 @@ namespace EmpiriaGalactica.Models {
         /// <summary>
         /// Used to update the building and apply it's effects.
         /// </summary>
-        /// <param name="planet">The planet this building is built on.</param>
-        public abstract void Update(Planet planet);
+        public Action<Planet> Update { get; set; }
     }
 }
