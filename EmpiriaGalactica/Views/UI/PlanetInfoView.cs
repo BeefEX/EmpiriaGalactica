@@ -24,13 +24,13 @@ namespace EmpiriaGalactica.Views.UI {
             
             renderer.PrintText("Planet govener: " + Model.Owner.Name, Top + new Vector(2, 5), HorizontalAlign.Left, Color.White, Color.Black);
 
-            renderer.PrintText(new string(' ', Bottom.X - Top.X), Top + new Vector(0, 7), HorizontalAlign.Left, Color.Black, Color.White);
+            renderer.PrintText(new string(' ', Bottom.X - Top.X - 2), Top + new Vector(1, 7), HorizontalAlign.Left, Color.Black, Color.Grey);
             
             renderer.PrintText("Biome: " + Model.Biome, Top + new Vector(2, 9), HorizontalAlign.Left, Color.White, Color.Black);
             
             renderer.PrintText("Radius: " + Model.Radius, Top + new Vector(2, 11), HorizontalAlign.Left, Color.White, Color.Black);
             
-            renderer.PrintText(new string(' ', Bottom.X - Top.X), Top + new Vector(0, 13), HorizontalAlign.Left, Color.Black, Color.White);
+            renderer.PrintText(new string(' ', Bottom.X - Top.X - 2), Top + new Vector(1, 13), HorizontalAlign.Left, Color.Black, Color.Grey);
             
             renderer.PrintText("Population: " + Model.Pupulation, Top + new Vector(2, 15), HorizontalAlign.Left, Color.White, Color.Black);
             

@@ -17,6 +17,8 @@ namespace EmpiriaGalactica_CLI {
                 return ConsoleColor.Blue;
             if (color == Color.Yellow)
                 return ConsoleColor.Yellow;
+            if (color == Color.Grey)
+                return ConsoleColor.DarkGray;
             
             return ConsoleColor.Black;
         }
