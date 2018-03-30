@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using EmpiriaGalactica.Managers;
 
 namespace EmpiriaGalactica.Models {
     
     /// <summary>
-    /// A class reepresenting an galaxy.
+    /// A class representing an galaxy.
     /// </summary>
-    public class Galaxy {
+    public class Galaxy : IModel {
         
         /// <summary>
         /// The name of this galaxy.
@@ -20,8 +21,13 @@ namespace EmpiriaGalactica.Models {
         public Vector Position { get; set; }
         
         /// <summary>
+        /// A list of all empires in this galaxy.
+        /// </summary>
+        public List<Empire> Empires { get; set; }
+        
+        /// <summary>
         /// The star systems in this galaxy.
         /// </summary>
-        public List<StarSystem> StarSystems { get; set; }
+        public StarSystemManager StarSystems { get; set; }
     }
 }

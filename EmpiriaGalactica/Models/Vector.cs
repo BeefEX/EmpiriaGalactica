@@ -64,7 +64,11 @@ namespace EmpiriaGalactica.Models {
         public static Vector operator -(Vector a, Vector b) {
             return new Vector(a.X - b.X, a.Y - b.Y);
         }
-        
+
+        public override string ToString() {
+            return _x + "-" + _y;
+        }
+
         #endregion
 
         #region Properies

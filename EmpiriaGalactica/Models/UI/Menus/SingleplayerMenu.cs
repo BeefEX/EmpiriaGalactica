@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Controllers.UI;
 
 namespace EmpiriaGalactica.Models.UI.Menus {
@@ -6,7 +7,16 @@ namespace EmpiriaGalactica.Models.UI.Menus {
         public SingleplayerMenu() {
             Buttons = new List<Button>(new [] {
                 new Button {
-                    Title = "New game"
+                    Title = "New game",
+                    OnClick = () =>
+                        EmpiriaGalactica.GameController.CurrentController = new GalaxyViewController(new Galaxy {
+                            Name = "Test galaxy",
+                            Empires = new List<Empire>(new [] {
+                                new Empire {
+                                    Name = "Test empire"
+                                }
+                            })
+                        })
                 },
                 new Button {
                     Title = "Load game"
