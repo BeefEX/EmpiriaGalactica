@@ -7,7 +7,9 @@ namespace EmpiriaGalactica.Models.UI.Menus {
         public PlayMenu() {
             Buttons = new List<Button>(new[] {
                 new Button {
-                    Title = "Singleplayer"
+                    Title = "Singleplayer",
+                    OnClick = () =>
+                        EmpiriaGalactica.GameController.CurrentController = new MenuController(new SingleplayerMenu())
                 },
                 new Button {
                     Title = "Multiplayer"
