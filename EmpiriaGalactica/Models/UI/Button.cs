@@ -5,5 +5,8 @@ namespace EmpiriaGalactica.Models.UI {
 
         public string Title { get; set; }
         
+        public bool Selected { get; set; }
+
+        public Action OnClick { get; set; }
     }
 }

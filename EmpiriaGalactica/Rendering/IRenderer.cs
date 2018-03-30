@@ -11,6 +11,18 @@ namespace EmpiriaGalactica.Rendering {
     public interface IRenderer {
 
         /// <summary>
+        /// Used to clear the screen.
+        /// </summary>
+        /// <param name="color">The color to clear the screen with.</param>
+        void Clear(Color color);
+        
+        /// <summary>
+        /// Used to retrieve the size of the rendering grid.
+        /// </summary>
+        /// <returns>Size of the rendering grid.</returns>
+        Vector GetGridSize();
+
+        /// <summary>
         /// Prints an rectange on the screen.
         /// </summary>
         /// <param name="top">Top-right of the rectangle.</param>

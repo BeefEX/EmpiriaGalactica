@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EmpiriaGalactica.Controllers;
+using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Models.UI;
 
 namespace EmpiriaGalactica.Views.UI {
@@ -16,7 +17,12 @@ namespace EmpiriaGalactica.Views.UI {
         }
 
         public override void Update() {
-            foreach (var view in _buttonViews) {
+            var screenSize = EmpiriaGalactica.Renderer.GetGridSize();
+            var padding = screenSize.Y / Model.Buttons.Count / 2;
+            
+            for (var i = 0; i < _buttonViews.Count; i++) {
+                var view = _buttonViews[i];
+                view.Position = new Vector(screenSize.X / 2, (i + 1) * padding);
                 view.Update();
             }
         }

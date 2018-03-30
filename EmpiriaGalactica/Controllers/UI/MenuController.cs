@@ -1,4 +1,7 @@
-﻿using EmpiriaGalactica.Models.UI;
+﻿using System;
+using EmpiriaGalactica.Input;
+using EmpiriaGalactica.Models.UI;
+using EmpiriaGalactica.Rendering;
 using EmpiriaGalactica.Views.UI;
 
 namespace EmpiriaGalactica.Controllers.UI {
@@ -7,6 +10,7 @@ namespace EmpiriaGalactica.Controllers.UI {
         #region Members
 
         private readonly MenuView _view;
+        private int _selected;
         
         #endregion
         
@@ -14,16 +18,42 @@ namespace EmpiriaGalactica.Controllers.UI {
 
         public MenuController(Menu menu) {
             _view = new MenuView(this, menu);
+            
+            _selected = 0;
+            _view.Model.Buttons[_selected].Selected = true;
+            
+            EmpiriaGalactica.Input.KeyDown += OnInputOnKeyDown;
         }
 
         public void Update() {
+            EmpiriaGalactica.Renderer.Clear(Color.Black);
             _view.Update();
         }
         
         public void Dispose() {
-            _view.Dispose();
+            EmpiriaGalactica.Input.KeyDown -= OnInputOnKeyDown;
         }
 
+        private void OnInputOnKeyDown(object sender, KeyboardArgs args) {
+            _view.Model.Buttons[_selected].Selected = false;
+
+            if (args.Key == "DownArrow")
+                _selected++;
+            else if (args.Key == "UpArrow")
+                _selected--;
+            else if (args.Key == "Enter")
+                _view.Model.Buttons[_selected].OnClick?.Invoke();
+
+            if (_selected < 0)
+                _selected += _view.Model.Buttons.Count;
+            
+            _selected %= _view.Model.Buttons.Count;
+
+            _view.Model.Buttons[_selected].Selected = true;
+            
+            EmpiriaGalactica.GameController.Update();
+        }
+        
         #endregion
     }
 }

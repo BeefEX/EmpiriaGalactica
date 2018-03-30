@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using EmpiriaGalactica.Controllers.UI;
-using EmpiriaGalactica.Models.UI;
+﻿using EmpiriaGalactica.Controllers.UI;
+using EmpiriaGalactica.Models.UI.Menus;
 
 namespace EmpiriaGalactica.Controllers {
     public class GameController : IController {
@@ -8,13 +7,7 @@ namespace EmpiriaGalactica.Controllers {
         private IController _currentController;
         
         public GameController() {
-            _currentController = new MenuController(new Menu {
-                Buttons = new List<Button>(new [] {
-                    new Button {
-                        Title = "test"
-                    }
-                })
-            });
+            _currentController = new MenuController(new MainMenu());
         }
 
         public void Update() {
@@ -23,6 +16,14 @@ namespace EmpiriaGalactica.Controllers {
         
         public void Dispose() {
             _currentController.Dispose();
+        }
+
+        public IController CurrentController {
+            get => _currentController;
+            set {
+                _currentController.Dispose();
+                _currentController = value;
+            }
         }
     }
 }
