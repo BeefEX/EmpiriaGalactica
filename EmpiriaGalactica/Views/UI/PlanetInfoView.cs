@@ -22,7 +22,7 @@ namespace EmpiriaGalactica.Views.UI {
             
             renderer.PrintText("Name: " + Model.Name, Top + new Vector(2, 3), HorizontalAlign.Left, Color.White, Color.Black);
             
-            renderer.PrintText("Planet govener: " + Model.Owner.Name, Top + new Vector(2, 5), HorizontalAlign.Left, Color.White, Color.Black);
+            renderer.PrintText("Planet govener: " + (Model.Owner == null? "Nobody": Model.Owner.Name), Top + new Vector(2, 5), HorizontalAlign.Left, Color.White, Color.Black);
 
             renderer.PrintText(new string(' ', Bottom.X - Top.X - 2), Top + new Vector(1, 7), HorizontalAlign.Left, Color.Black, Color.Grey);
             

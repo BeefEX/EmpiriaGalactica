@@ -21,10 +21,9 @@ namespace EmpiriaGalactica.Controllers {
         
         public GalaxyViewController(Galaxy galaxy) {
             _galaxy = galaxy;
-            
-            _galaxyView = new GalaxyView(this, _galaxy);
-            _galaxyView.SelectedSystem = new Vector();
-            
+
+            _galaxyView = new GalaxyView(this, _galaxy) {SelectedSystem = new Vector()};
+
             _galaxyInfoView = new GalaxyInfoView(this, _galaxy);
             
             _starSystemInfoView = new StarSystemInfoView(this, _galaxy.StarSystems[_galaxyView.SelectedSystem]);
@@ -46,6 +45,7 @@ namespace EmpiriaGalactica.Controllers {
             _starSystemInfoView.Top = new Vector(screenSize.X - screenSize.X / 3, screenSize.Y / 4);
             _starSystemInfoView.Bottom = new Vector(screenSize.X, screenSize.Y);
             
+            _galaxyView.ForcedUpdate = true;
             _galaxyView.Update();
             _galaxyInfoView.Update();
             _starSystemInfoView.Update();
@@ -74,6 +74,7 @@ namespace EmpiriaGalactica.Controllers {
                 return;
             }
 
+            _galaxyView.ForcedUpdate = false;
             _galaxyView.Update();
 
             _starSystemInfoView.Model = _galaxy.StarSystems[_galaxyView.SelectedSystem];

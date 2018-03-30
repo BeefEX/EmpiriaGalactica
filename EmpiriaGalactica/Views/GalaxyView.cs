@@ -26,7 +26,7 @@ namespace EmpiriaGalactica.Views {
             
             var renderer = EmpiriaGalactica.Renderer;
             
-            if (_cachedSelectedSystem == null)
+            if (_cachedSelectedSystem == null || ForcedUpdate)
                 DrawInitial();
             else {
                 renderer.PrintText("   ", Top + new Vector(_cachedSelectedSystem.X * 6, _cachedSelectedSystem.Y * 3), HorizontalAlign.Left, Color.White, Color.Black);
@@ -63,6 +63,8 @@ namespace EmpiriaGalactica.Views {
         #region Properties
 
         public Vector SelectedSystem { get; set; }
+        
+        public bool ForcedUpdate { get; set; }
 
         #endregion
     }

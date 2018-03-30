@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EmpiriaGalactica.Models;
+using Newtonsoft.Json;
 
 namespace EmpiriaGalactica.Managers {
     public class StarSystemManager {
@@ -9,6 +10,7 @@ namespace EmpiriaGalactica.Managers {
         /// <summary>
         /// THe items that are registred to this register.
         /// </summary>
+        [JsonProperty]
         private readonly Dictionary<string, StarSystem> _registeredItems;
         
         #endregion
