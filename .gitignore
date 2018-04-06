@@ -357,4 +357,4 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/csharp,intellij+all
 
-EmpiriaGalactica-GUI/imgui.ini
+/EmpiriaGalactica-GUI/imgui.ini

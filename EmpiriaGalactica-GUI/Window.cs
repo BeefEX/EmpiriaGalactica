@@ -14,7 +14,6 @@ namespace EmpiriaGalactica_GUI {
         public override void ImGuiLayout() {
             ImGui.BeginWindow("test");
             ImGui.Text("this is a text");
-            ImGui.Image();
             ImGui.EndWindow();
         }
     }
