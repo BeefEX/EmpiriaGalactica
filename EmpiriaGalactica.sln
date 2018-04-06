@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpiriaGalactica", "Empiria
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpiriaGalactica-CLI", "EmpiriaGalactica-CLI\EmpiriaGalactica-CLI.csproj", "{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpiriaGalactica-GUI", "EmpiriaGalactica-GUI\EmpiriaGalactica-GUI.csproj", "{8BE3EC79-571C-4A63-B5D6-7DDEE0B3CA47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{086A8AD5-B60F-4FE3-95F6-85D999BEBBE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE3EC79-571C-4A63-B5D6-7DDEE0B3CA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE3EC79-571C-4A63-B5D6-7DDEE0B3CA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE3EC79-571C-4A63-B5D6-7DDEE0B3CA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE3EC79-571C-4A63-B5D6-7DDEE0B3CA47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
