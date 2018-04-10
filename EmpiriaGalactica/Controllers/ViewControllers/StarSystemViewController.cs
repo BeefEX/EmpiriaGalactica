@@ -1,6 +1,4 @@
-﻿using EmpiriaGalactica.Input;
-using EmpiriaGalactica.Models;
-using EmpiriaGalactica.Rendering;
+﻿using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Views;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {

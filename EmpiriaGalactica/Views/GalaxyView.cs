@@ -1,6 +1,5 @@
 ﻿using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Models;
-using EmpiriaGalactica.Rendering;
 
 namespace EmpiriaGalactica.Views {
     public abstract class GalaxyView : View<Galaxy> {

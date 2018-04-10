@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using EmpiriaGalactica.Controllers;
-using EmpiriaGalactica.Input;
 using EmpiriaGalactica.Managers;
 using EmpiriaGalactica.Models;
-using EmpiriaGalactica.Rendering;
 
 namespace EmpiriaGalactica {
     

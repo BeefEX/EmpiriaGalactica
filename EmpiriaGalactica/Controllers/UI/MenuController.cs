@@ -1,7 +1,5 @@
 ﻿using System;
-using EmpiriaGalactica.Input;
 using EmpiriaGalactica.Models.UI;
-using EmpiriaGalactica.Rendering;
 
 namespace EmpiriaGalactica.Controllers.UI {
     public class MenuController : IController {
@@ -35,6 +33,7 @@ namespace EmpiriaGalactica.Controllers.UI {
             //EmpiriaGalactica.Input.KeyDown -= OnInputOnKeyDown;
         }
 
+        /*
         private void OnInputOnKeyDown(object sender, KeyboardArgs args) {
             /*
             _view.Model.Buttons[_selected].Selected = false;
@@ -56,8 +55,9 @@ namespace EmpiriaGalactica.Controllers.UI {
             _view.Model.Buttons[_selected].Selected = true;
             
             EmpiriaGalactica.GameController.Update();
-            */
+         
         }
+        */
         
         #endregion
 
