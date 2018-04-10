@@ -5,7 +5,7 @@ using EmpiriaGalactica.Rendering;
 using EmpiriaGalactica.Views;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
-    /*
+    
     public class GalaxyViewController : IController {
         
         #region Members
@@ -38,11 +38,11 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
         
         #region Properties
 
-        public GalaxyController GalaxyController => _galaxyController;
-
         public GalaxyView View => _view;
+
+        public bool HasParent => true;
+        public IController Parent => _galaxyController;
 
         #endregion
     }
-    */
 }

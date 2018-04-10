@@ -23,16 +23,16 @@ namespace EmpiriaGalactica.Controllers.UI {
             _selected = 0;
             //_view.Model.Buttons[_selected].Selected = true;
             
-            EmpiriaGalactica.Input.KeyDown += OnInputOnKeyDown;
+            //EmpiriaGalactica.Input.KeyDown += OnInputOnKeyDown;
         }
 
         public void Update() {
-            EmpiriaGalactica.Renderer.Clear(Color.Black);
+            //EmpiriaGalactica.Renderer.Clear(Color.Black);
             //_view.Update();
         }
         
         public void Dispose() {
-            EmpiriaGalactica.Input.KeyDown -= OnInputOnKeyDown;
+            //EmpiriaGalactica.Input.KeyDown -= OnInputOnKeyDown;
         }
 
         private void OnInputOnKeyDown(object sender, KeyboardArgs args) {
@@ -59,6 +59,13 @@ namespace EmpiriaGalactica.Controllers.UI {
             */
         }
         
+        #endregion
+
+        #region Properties
+
+        public bool HasParent => false;
+        public IController Parent => null;
+
         #endregion
     }
 }

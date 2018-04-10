@@ -9,20 +9,25 @@ namespace EmpiriaGalactica.Controllers {
         private readonly StarSystem _starSystem;
 
         private List<PlanetController> _planetControllers;
+
+        private readonly GalaxyController _parentGalaxyController;
         
         #endregion
         
         #region Methods
 
-        public StarSystemController(StarSystem starSystem) {
+        public StarSystemController(StarSystem starSystem, GalaxyController galaxyController) {
             _starSystem = starSystem;
+            _parentGalaxyController = galaxyController;
+
+            Init();
         }
 
         public void Init() {
             _planetControllers = new List<PlanetController>();
 
             foreach (var planet in _starSystem.Planets) {
-                _planetControllers.Add(new PlanetController(planet));
+                _planetControllers.Add(new PlanetController(planet, this));
             }
         }
 
@@ -39,6 +44,10 @@ namespace EmpiriaGalactica.Controllers {
         #region Properties
 
         public StarSystem StarSystem => _starSystem;
+
+        public bool HasParent => true;
+
+        public IController Parent => _parentGalaxyController;
 
         #endregion
     }

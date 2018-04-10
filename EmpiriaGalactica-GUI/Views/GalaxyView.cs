@@ -10,25 +10,40 @@ using ImGuiNET;
 
 namespace EmpiriaGalactica_GUI.Views {
     
+    /// <summary>
+    /// Renders an glaxy using ImGui and OpenGL.
+    /// </summary>
+    /// <inheritdoc />
     [Implements(typeof(global::EmpiriaGalactica.Views.GalaxyView))]
     public class GalaxyView : global::EmpiriaGalactica.Views.GalaxyView {
         
         #region Members
 
+        /// <summary>
+        /// The texture to use for the star systems.
+        /// </summary>
         private static GlTexture _texture;
         
         #endregion
         
         #region Methods
 
+        /// <summary>
+        /// Used to load the textures required for this view.
+        /// </summary>
         public static void InitTextures() {
             _texture = new GlTexture(new Bitmap("assets/starSystem.png"));
         }
         
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="controller">Controller this view has to report to.</param>
+        /// <param name="model">The model this view is rendering.</param>
         public GalaxyView(IController controller, Galaxy model) : base(controller, model) { }
         
+        /// <inheritdoc />
         public override void Update() {
-
             var i = 0;
             
             foreach (var starSystem in Model.StarSystems) {
@@ -66,17 +81,8 @@ namespace EmpiriaGalactica_GUI.Views {
             }
         }
 
-        public override void Dispose() {
-            
-        }
-        
-        #endregion
-        
-        #region Properties
-        
-        #endregion
-        
-        #region Operators
+        /// <inheritdoc />
+        public override void Dispose() { }
         
         #endregion
         

@@ -9,17 +9,12 @@ namespace EmpiriaGalactica {
     
     public class EmpiriaGalactica {
         
-        //public static GameController GameController;
+        public static GameController GameController;
 
         public static InstanceManager<Building> Buildings;
         public static InstanceManager<Resource> Resources;
         
-        public static IRenderer Renderer;
-        public static IInput Input;
-        
-        public EmpiriaGalactica(IRenderer renderer, IInput input) {
-            Renderer = renderer;
-            Input = input;
+        public EmpiriaGalactica() {
             
             Buildings = new InstanceManager<Building>();
             
@@ -45,7 +40,7 @@ namespace EmpiriaGalactica {
             );
             
             Resources = new InstanceManager<Resource>();
-            //GameController = new GameController();
+            GameController = new GameController();
         }
     }
 }
