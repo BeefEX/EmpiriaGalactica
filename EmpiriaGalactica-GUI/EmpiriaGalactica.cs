@@ -1,4 +1,8 @@
-﻿namespace EmpiriaGalactica_GUI {
+﻿using System;
+using System.Runtime.InteropServices;
+using ImGuiNET;
+
+namespace EmpiriaGalactica_GUI {
     
     /// <summary>
     /// The entry call of the game.
@@ -17,5 +21,10 @@
             _window = new Window();
             _window.Start();
         }
+
+        /// <summary>
+        /// An window instance.
+        /// </summary>
+        public static Window Window => _window;
     }
 }
