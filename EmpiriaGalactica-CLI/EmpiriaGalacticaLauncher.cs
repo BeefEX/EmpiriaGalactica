@@ -5,7 +5,7 @@
         
         static void Main(string[] args) {
             Game = new EmpiriaGalactica.EmpiriaGalactica(new CliRenderer(), new CliInput());
-            EmpiriaGalactica.EmpiriaGalactica.GameController.Update();
+            //EmpiriaGalactica.EmpiriaGalactica.GameController.Update();
         }
     }
 }

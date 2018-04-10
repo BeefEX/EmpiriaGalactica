@@ -5,6 +5,7 @@ using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Models.UI.Menus;
 
 namespace EmpiriaGalactica.Controllers {
+    /*
     public class GameController : IController {
 
         private IController _currentController;
@@ -64,4 +65,5 @@ namespace EmpiriaGalactica.Controllers {
             Update();
         }
     }
+    */
 }

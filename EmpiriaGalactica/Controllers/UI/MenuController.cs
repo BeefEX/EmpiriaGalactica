@@ -2,14 +2,13 @@
 using EmpiriaGalactica.Input;
 using EmpiriaGalactica.Models.UI;
 using EmpiriaGalactica.Rendering;
-using EmpiriaGalactica.Views.UI;
 
 namespace EmpiriaGalactica.Controllers.UI {
     public class MenuController : IController {
         
         #region Members
 
-        private readonly MenuView _view;
+        //private readonly MenuView _view;
         private int _selected;
         
         #endregion
@@ -17,19 +16,19 @@ namespace EmpiriaGalactica.Controllers.UI {
         #region Methods
 
         public MenuController(Menu menu) {
-            _view = new MenuView(this, menu);
+            //_view = new MenuView(this, menu);
         }
 
         public void Init() {
             _selected = 0;
-            _view.Model.Buttons[_selected].Selected = true;
+            //_view.Model.Buttons[_selected].Selected = true;
             
             EmpiriaGalactica.Input.KeyDown += OnInputOnKeyDown;
         }
 
         public void Update() {
             EmpiriaGalactica.Renderer.Clear(Color.Black);
-            _view.Update();
+            //_view.Update();
         }
         
         public void Dispose() {
@@ -37,6 +36,7 @@ namespace EmpiriaGalactica.Controllers.UI {
         }
 
         private void OnInputOnKeyDown(object sender, KeyboardArgs args) {
+            /*
             _view.Model.Buttons[_selected].Selected = false;
 
             if (args.Key == "DownArrow")
@@ -56,6 +56,7 @@ namespace EmpiriaGalactica.Controllers.UI {
             _view.Model.Buttons[_selected].Selected = true;
             
             EmpiriaGalactica.GameController.Update();
+            */
         }
         
         #endregion

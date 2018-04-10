@@ -1,9 +1,9 @@
 ﻿using EmpiriaGalactica.Input;
 using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Rendering;
-using EmpiriaGalactica.Views.UI;
 
-namespace EmpiriaGalactica.Controllers {
+namespace EmpiriaGalactica.Controllers.ViewControllers {
+    /*
     public class PlanetViewController : IController {
 
         private Planet _planet;
@@ -59,4 +59,5 @@ namespace EmpiriaGalactica.Controllers {
             Update();
         }
     }
+    */
 }

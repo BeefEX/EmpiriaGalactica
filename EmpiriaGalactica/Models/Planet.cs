@@ -44,6 +44,6 @@ namespace EmpiriaGalactica.Models {
         /// <summary>
         /// The buildings on this planet.
         /// </summary>
-        public List<Building> Buildings { get; set; }
+        public List<BuildingInstance> Buildings { get; set; }
     }
 }

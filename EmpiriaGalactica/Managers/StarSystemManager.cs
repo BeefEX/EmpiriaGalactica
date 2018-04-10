@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using EmpiriaGalactica.Models;
 using Newtonsoft.Json;
 
 namespace EmpiriaGalactica.Managers {
-    public class StarSystemManager {
+    
+    /// <inheritdoc />
+    /// <summary>
+    /// Used to store Star Systems indexed by their position.
+    /// </summary>
+    public class StarSystemManager : IEnumerable<StarSystem> {
 
         #region Members
         
@@ -18,7 +24,7 @@ namespace EmpiriaGalactica.Managers {
         #region Methods
 
         /// <summary>
-        /// Creates a new register.
+        /// Creates a new manager.
         /// </summary>
         public StarSystemManager() {
             _registeredItems = new Dictionary<string, StarSystem>();
@@ -39,9 +45,21 @@ namespace EmpiriaGalactica.Managers {
         /// </summary>
         /// <param name="position">The position to check for.</param>
         /// <returns>Whenever the item was found.</returns>
-        public bool Contains(Vector position) {
-            return _registeredItems.ContainsKey(position.ToString());
-        }
+        public bool Contains(Vector position) => _registeredItems.ContainsKey(position.ToString());
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Used to enumerate the star systems.
+        /// </summary>
+        /// <returns>Enumerator containing the star systems.</returns>
+        public IEnumerator<StarSystem> GetEnumerator() => _registeredItems.Values.GetEnumerator();
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Used to enumerate the star systems.
+        /// </summary>
+        /// <returns>Enumerator containing the star systems.</returns>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion
 
@@ -54,6 +72,5 @@ namespace EmpiriaGalactica.Managers {
         public StarSystem this[Vector i] => _registeredItems[i.ToString()];
 
         #endregion
-        
     }
 }

@@ -4,8 +4,9 @@ using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Rendering;
 
 namespace EmpiriaGalactica.Views {
-    public class StarSystemView : Panel<StarSystem> {
+    public abstract class StarSystemView : View<StarSystem> {
         
+        /*
         #region Members
 
         private static readonly int[] StarLines = {
@@ -116,5 +117,8 @@ namespace EmpiriaGalactica.Views {
         public bool ForcedUpdate { get; set; }
         
         #endregion
+        
+        */
+        protected StarSystemView(IController controller, StarSystem model) : base(controller, model) { }
     }
 }

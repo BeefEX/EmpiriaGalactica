@@ -2,9 +2,9 @@
 using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Rendering;
 using EmpiriaGalactica.Views;
-using EmpiriaGalactica.Views.UI;
 
-namespace EmpiriaGalactica.Controllers {
+namespace EmpiriaGalactica.Controllers.ViewControllers {
+    /*
     public class StarSystemViewController : IController {
         
         #region Members
@@ -20,16 +20,18 @@ namespace EmpiriaGalactica.Controllers {
         #region Methods
 
         public StarSystemViewController(StarSystem starSystem) {
+            /*
             _starSystem = starSystem;
             _starSystemView = new StarSystemView(this, _starSystem);
             _starSystemInfoView = new StarSystemInfoView(this, _starSystem);
             _planetInfoView = new PlanetInfoView(this, _starSystem.Planets[_starSystemView.SelectedPlanet]);
+            
         }
 
         public void Init() {
             EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
 
-            _starSystemView.ForcedUpdate = true;
+            //_starSystemView.ForcedUpdate = true;
         }
 
         public void Update() {
@@ -58,6 +60,7 @@ namespace EmpiriaGalactica.Controllers {
         }
 
         private void InputOnKeyDown(object sender, KeyboardArgs e) {
+            /*
             if (e.Key == "LeftArrow")
                 _starSystemView.SelectedPlanet--;
             else if (e.Key == "RightArrow")
@@ -79,6 +82,7 @@ namespace EmpiriaGalactica.Controllers {
             
             _planetInfoView.Update();
             _starSystemView.Update();
+            
         }
         
         #endregion
@@ -87,4 +91,5 @@ namespace EmpiriaGalactica.Controllers {
         
         #endregion
     }
+    */
 }

@@ -9,8 +9,9 @@ namespace EmpiriaGalactica.Models.UI.Menus {
             Buttons = new List<Button>(new [] {
                 new Button {
                     Title = "Play",
+                    /*
                     OnClick = () =>
-                        EmpiriaGalactica.GameController.CurrentController = new MenuController(new PlayMenu())
+                        //EmpiriaGalactica.GameController.CurrentController = new MenuController(new PlayMenu())*/
                 },
                 new Button {
                     Title = "Settings"
