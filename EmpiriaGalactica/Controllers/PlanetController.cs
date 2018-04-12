@@ -1,4 +1,5 @@
-﻿using EmpiriaGalactica.Models;
+﻿using EmpiriaGalactica.Commands;
+using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Controllers {
     public class PlanetController : IController {
@@ -37,6 +38,9 @@ namespace EmpiriaGalactica.Controllers {
 
         /// <inheritdoc />
         public void Dispose() { }
+
+        /// <inheritdoc />
+        public void OnCommand(Command command) { }
 
         #endregion
         

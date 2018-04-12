@@ -1,8 +1,10 @@
-﻿using EmpiriaGalactica.Models;
+﻿using EmpiriaGalactica.Commands;
+using EmpiriaGalactica.Managers;
+using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Views;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
-    /*
+    
     public class StarSystemViewController : IController {
         
         #region Members
@@ -10,84 +12,60 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
         private readonly StarSystem _starSystem;
         
         private readonly StarSystemView _starSystemView;
-        private readonly StarSystemInfoView _starSystemInfoView;
-        private readonly PlanetInfoView _planetInfoView;
+
+        private readonly StarSystemController _parentStarSystemController;
+
+        private PlanetWindowViewController _planetWindowViewController;
         
         #endregion
         
         #region Methods
 
-        public StarSystemViewController(StarSystem starSystem) {
-            /*
+        public StarSystemViewController(StarSystem starSystem, StarSystemController parent) {
             _starSystem = starSystem;
-            _starSystemView = new StarSystemView(this, _starSystem);
-            _starSystemInfoView = new StarSystemInfoView(this, _starSystem);
-            _planetInfoView = new PlanetInfoView(this, _starSystem.Planets[_starSystemView.SelectedPlanet]);
-            
+            _starSystemView = DependecyManager.GetInstance<StarSystemView>(this, starSystem);
+
+            _parentStarSystemController = parent;
+
+            _planetWindowViewController = null;
         }
 
+        /// <inheritdoc />
         public void Init() {
-            EmpiriaGalactica.Input.KeyDown += InputOnKeyDown;
-
-            //_starSystemView.ForcedUpdate = true;
         }
 
+        /// <inheritdoc />
         public void Update() {
-            EmpiriaGalactica.Renderer.Clear(Color.Black);
-            var screenSize = EmpiriaGalactica.Renderer.GetGridSize();
-            
-            _starSystemView.Top = new Vector(0, 1);
-            _starSystemView.Bottom = screenSize - new Vector(screenSize.X / 3, 0);
-            
-            _starSystemInfoView.Top = new Vector(screenSize.X - screenSize.X / 3, 0);
-            _starSystemInfoView.Bottom = new Vector(screenSize.X, screenSize.Y / 4);
-            
-            _planetInfoView.Top = new Vector(screenSize.X - screenSize.X / 3, screenSize.Y / 4);
-            _planetInfoView.Bottom = new Vector(screenSize.X, screenSize.Y);
-            
             _starSystemView.Update();
-            _planetInfoView.Update();
-            _starSystemInfoView.Update();
+            
+            _planetWindowViewController?.Update();
         }
-        
+
+        /// <inheritdoc />
         public void Dispose() {
             _starSystemView.Dispose();
-            _starSystemInfoView.Dispose();
-
-            EmpiriaGalactica.Input.KeyDown -= InputOnKeyDown;
+            
+            _planetWindowViewController?.Dispose();
         }
 
-        private void InputOnKeyDown(object sender, KeyboardArgs e) {
-            /*
-            if (e.Key == "LeftArrow")
-                _starSystemView.SelectedPlanet--;
-            else if (e.Key == "RightArrow")
-                _starSystemView.SelectedPlanet++;
-            else if (e.Key == "Enter") {
-                EmpiriaGalactica.GameController.CurrentController = new PlanetViewController(_starSystem.Planets[_starSystemView.SelectedPlanet]);
-                return;
-            } else if (e.Key == "Escape") {
-                EmpiriaGalactica.GameController.PopBack();
-                return;
+        /// <inheritdoc />
+        public void OnCommand(Command command) {
+            switch (command.Label) {
+                case "Click":
+                    _planetWindowViewController?.Dispose();
+            
+                    _planetWindowViewController = new PlanetWindowViewController((Planet) command.Parameters[0], this);        
+                    break;
             }
-
-            if (_starSystemView.SelectedPlanet < 0)
-                _starSystemView.SelectedPlanet += _starSystemView.Model.Planets.Count;
-            
-            _starSystemView.SelectedPlanet %= _starSystemView.Model.Planets.Count;
-
-            _planetInfoView.Model = _starSystem.Planets[_starSystemView.SelectedPlanet];
-            
-            _planetInfoView.Update();
-            _starSystemView.Update();
-            
         }
         
         #endregion
         
         #region Properties
-        
+
+        public bool HasParent => true;
+        public IController Parent => _parentStarSystemController;
+
         #endregion
     }
-    */
 }

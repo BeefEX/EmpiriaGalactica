@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Controllers {
@@ -38,6 +39,9 @@ namespace EmpiriaGalactica.Controllers {
         public void Dispose() {
             _planetControllers.ForEach(controller => controller.Dispose());
         }
+        
+        /// <inheritdoc />
+        public void OnCommand(Command command) { }
         
         #endregion
         

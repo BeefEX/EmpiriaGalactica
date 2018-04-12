@@ -3,6 +3,7 @@ using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Views {
+    
     public abstract class StarSystemView : View<StarSystem> {
         
         /*

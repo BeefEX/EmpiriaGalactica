@@ -1,4 +1,5 @@
 ﻿using System;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Models.UI;
 
 namespace EmpiriaGalactica.Controllers.UI {
@@ -59,6 +60,10 @@ namespace EmpiriaGalactica.Controllers.UI {
         }
         */
         
+        public void OnCommand(Command command) {
+            throw new NotImplementedException();
+        }
+        
         #endregion
 
         #region Properties
@@ -67,5 +72,6 @@ namespace EmpiriaGalactica.Controllers.UI {
         public IController Parent => null;
 
         #endregion
+
     }
 }

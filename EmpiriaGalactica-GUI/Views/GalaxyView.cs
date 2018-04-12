@@ -2,7 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Drawing;
 using System.Numerics;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Controllers;
+using EmpiriaGalactica.Controllers.ViewControllers;
 using EmpiriaGalactica.Managers;
 using EmpiriaGalactica.Models;
 using EmpiriaGalactica_GUI.GlUtils;
@@ -45,12 +47,16 @@ namespace EmpiriaGalactica_GUI.Views {
         /// <inheritdoc />
         public override void Update() {
             var i = 0;
+
+            StarSystem hovered = null;
             
             foreach (var starSystem in Model.StarSystems) {
                 
                 ImGui.SetNextWindowPos(new Vector2(starSystem.Position.X * 30, starSystem.Position.Y * 30), Condition.Always, Vector2.Zero);
 
                 bool tmp = true;
+                
+                ImGui.PushStyleVar(StyleVar.WindowPadding, Vector2.Zero);
 
                 ImGui.BeginWindow($"system{i}",
                     ref tmp,
@@ -60,7 +66,6 @@ namespace EmpiriaGalactica_GUI.Views {
                     WindowFlags.NoTitleBar |
                     WindowFlags.NoScrollWithMouse |
                     WindowFlags.NoBringToFrontOnFocus);
-                ImGui.PushStyleVar(StyleVar.WindowPadding, Vector2.Zero);
 
                 var clicked = ImGui.ImageButton(
                     new IntPtr(_texture.TextureId),
@@ -70,15 +75,25 @@ namespace EmpiriaGalactica_GUI.Views {
                     0,
                     Vector4.Zero,
                     Vector4.One);
+                
                 ImGui.PushStyleColor(ColorTarget.Button, Vector4.Zero);
                 ImGui.PushStyleColor(ColorTarget.ButtonHovered, Vector4.Zero);
+                ImGui.PushStyleColor(ColorTarget.ButtonActive, Vector4.Zero);
+
+                if (ImGui.IsItemHovered(HoveredFlags.Default))
+                    hovered = starSystem;
 
                 if (clicked)
-                    Console.WriteLine(starSystem.Position);
+                    Controller.OnCommand(new Command("Click", starSystem));
                 
                 ImGui.EndWindow();
                 i++;
             }
+
+            if (hovered != null)
+                Controller.OnCommand(new Command("HoverStart", hovered));
+            else
+                Controller.OnCommand(new Command("HoverEnd"));
         }
 
         /// <inheritdoc />

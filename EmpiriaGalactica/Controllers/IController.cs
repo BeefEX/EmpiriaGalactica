@@ -1,4 +1,5 @@
 ﻿using System;
+using EmpiriaGalactica.Commands;
 
 namespace EmpiriaGalactica.Controllers {
     
@@ -6,7 +7,7 @@ namespace EmpiriaGalactica.Controllers {
     /// The controller part of MVC.
     /// </summary>
     /// <inheritdoc />
-    public interface IController : IDisposable {
+    public interface IController : IDisposable, ICommandable {
 
         #region Methods
         

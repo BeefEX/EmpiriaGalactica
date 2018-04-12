@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Controllers.UI;
 using EmpiriaGalactica.Controllers.ViewControllers;
 using EmpiriaGalactica.Managers;
@@ -122,6 +123,9 @@ namespace EmpiriaGalactica.Controllers {
             // Update the new view
             Update();
         }
+        
+        /// <inheritdoc />
+        public void OnCommand(Command command) { }
         
         #endregion
 

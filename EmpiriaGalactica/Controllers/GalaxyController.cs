@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Controllers {
@@ -8,7 +9,7 @@ namespace EmpiriaGalactica.Controllers {
 
         private readonly Galaxy _galaxy;
 
-        private List<StarSystemController> _starSystemControllers;
+        private Dictionary<string, StarSystemController> _starSystemControllers;
         
         #endregion
         
@@ -25,23 +26,39 @@ namespace EmpiriaGalactica.Controllers {
 
         /// <inheritdoc />
         public void Init() {
-            _starSystemControllers = new List<StarSystemController>();
+            _starSystemControllers = new Dictionary<string, StarSystemController>();
 
             foreach (var starSystem in _galaxy.StarSystems) {
-                _starSystemControllers.Add(new StarSystemController(starSystem, this));
+                _starSystemControllers.Add(starSystem.Position.ToString(), new StarSystemController(starSystem, this));
             }
         }
         
 
         /// <inheritdoc />
         public void Update() {
-            _starSystemControllers.ForEach(controller => controller.Update());
+            foreach (var starSystemController in _starSystemControllers.Values) {
+                starSystemController.Update();
+            }
         }
         
         /// <inheritdoc />
         public void Dispose() {
-            _starSystemControllers.ForEach(controller => controller.Dispose());
+            foreach (var starSystemController in _starSystemControllers.Values) {
+                starSystemController.Dispose();
+            }
         }
+
+        /// <summary>
+        /// Used to retrieve the controller for a star system.
+        /// </summary>
+        /// <param name="starSystem">Thew star system to get a controller for.</param>
+        /// <returns>The controller.</returns>
+        public StarSystemController GetController(StarSystem starSystem) {
+            return _starSystemControllers[starSystem.Position.ToString()];
+        }
+        
+        /// <inheritdoc />
+        public void OnCommand(Command command) { }
         
         #endregion
         
@@ -57,6 +74,7 @@ namespace EmpiriaGalactica.Controllers {
         
         /// <inheritdoc />
         public IController Parent => null;
+        
 
         #endregion
     }
