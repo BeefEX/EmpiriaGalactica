@@ -60,6 +60,10 @@ namespace EmpiriaGalactica.Controllers {
                     if (!canBuild)
                         return;
                     
+                    building.BaseCost.ForEach(instance => {
+                        _planet.Owner.Resources[instance.SourceResource.InternalName] -= instance.Amount;
+                    });
+                    
                     _planet.Buildings.Add(new BuildingInstance {
                         SourceBuilding = building,
                         Level = 1

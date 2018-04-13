@@ -38,13 +38,13 @@ namespace EmpiriaGalactica_GUI.Views.UI {
             ImGui.PushStyleColor(ColorTarget.Text, new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
             ImGui.Text("Name:");
             ImGui.SameLine();
-            ImGui.PushStyleColor(ColorTarget.Text, Vector4.One);
+            ImGui.PopStyleColor();
             ImGui.Text($"{Model.Name}");
             
             ImGui.PushStyleColor(ColorTarget.Text, new Vector4(0.5f, 0.5f, 0.5f, 1.0f));
             ImGui.Text("Number of planets: ");
             ImGui.SameLine();
-            ImGui.PushStyleColor(ColorTarget.Text, Vector4.One);
+            ImGui.PopStyleColor();
             ImGui.Text($"{Model.Planets.Count.ToString()}");
             
             ImGui.EndWindow();

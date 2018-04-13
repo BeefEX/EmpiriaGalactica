@@ -62,6 +62,11 @@ namespace EmpiriaGalactica.Managers {
             set => _resources[name] = value;
         }
 
+        /// <summary>
+        /// The resources stored here.
+        /// </summary>
+        public IEnumerable<ResourceInstance> Resources => _resources.Values;
+
         #endregion
     }
 }

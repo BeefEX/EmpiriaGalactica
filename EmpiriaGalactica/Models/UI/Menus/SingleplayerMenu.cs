@@ -11,8 +11,11 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                     Title = "New game",
                     OnClick = () => {
                         var emp = new Empire {
-                            Name = "Test empire"
+                            Name = "Test empire",
+                            Resources = new ResourceManager()
                         };
+
+                        emp.Resources["resource/metal"] += 1000;
 
                         var sys = new StarSystemManager();
                         for (int x = 0; x < 16; x++) {
@@ -73,10 +76,13 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                             CurrentTurn = 0,
                             Galaxy = galaxy
                         };
-                        
-                        var controller = new OverlayViewController(game);
-                        controller.ChildViewController = new GalaxyViewController(galaxyController);
 
+                        var controller = new OverlayViewController(game) {
+                            ChildViewController = new GalaxyViewController(galaxyController)
+                        };
+
+                        EmpiriaGalactica.GameController.Game = game;
+                        
                         EmpiriaGalactica.GameController.CurrentController = controller;
                     }
                 },

@@ -70,7 +70,7 @@ namespace EmpiriaGalactica_GUI.Views.UI {
                     var buildingInstance = Model.Buildings[i];
                     ImGui.Text(buildingInstance.SourceBuilding.Name);
 
-                    if (ImGui.Button($"Destroy##d{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 10))) {
+                    if (ImGui.Button($"Destroy##d{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 20))) {
                         Controller.OnCommand(new Command("DestroyBuilding", buildingInstance));
                     }
                 }
@@ -96,7 +96,7 @@ namespace EmpiriaGalactica_GUI.Views.UI {
                     var buildingInstance = buildings[i];
                     ImGui.Text(buildingInstance.Name);
 
-                    if (ImGui.Button($"Build##b{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 10))) {
+                    if (ImGui.Button($"Build##b{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 20))) {
                         Controller.OnCommand(new Command("BuildBuilding", buildingInstance));
                     }
                 }

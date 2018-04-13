@@ -15,6 +15,31 @@ namespace EmpiriaGalactica {
         
         public EmpiriaGalactica() {
             
+            Resources = new InstanceManager<Resource>();
+            
+            Resources.RegisterItems(
+                new Resource {
+                    Name = "Ore",
+                    BaseCost = 10,
+                    InternalName = "resource/ore"
+                },
+                new Resource {
+                    Name = "Metal",
+                    BaseCost = 10,
+                    InternalName = "resource/metal"
+                },
+                new Resource {
+                    Name = "Oil",
+                    BaseCost = 10,
+                    InternalName = "resource/oil"
+                },
+                new Resource {
+                    Name = "Fuel",
+                    BaseCost = 10,
+                    InternalName = "resource/fuel"
+                });
+            
+            
             Buildings = new InstanceManager<Building>();
             
             Buildings.RegisterItems(
@@ -132,29 +157,6 @@ namespace EmpiriaGalactica {
                 }*/
             );
             
-            Resources = new InstanceManager<Resource>();
-            
-            Resources.RegisterItems(
-                new Resource {
-                    Name = "Ore",
-                    BaseCost = 10,
-                    InternalName = "resource/ore"
-                },
-                new Resource {
-                    Name = "Metal",
-                    BaseCost = 10,
-                    InternalName = "resource/metal"
-                },
-                new Resource {
-                    Name = "Oil",
-                    BaseCost = 10,
-                    InternalName = "resource/oil"
-                },
-                new Resource {
-                    Name = "Fuel",
-                    BaseCost = 10,
-                    InternalName = "resource/fuel"
-                });
             
             GameController = new GameController();
         }

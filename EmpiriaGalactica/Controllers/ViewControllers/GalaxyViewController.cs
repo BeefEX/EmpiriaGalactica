@@ -57,8 +57,13 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
                     break;
                 case "Click":
                     var starSystem = (StarSystem) command.Parameters[0];
-                    EmpiriaGalactica.GameController.CurrentController = new StarSystemViewController(starSystem,
-                        _galaxyController.GetController(starSystem));
+                    EmpiriaGalactica.GameController.CurrentController =
+                        new OverlayViewController(EmpiriaGalactica.GameController.Game) {
+                            ChildViewController = new StarSystemViewController(
+                                starSystem,
+                                _galaxyController.GetController(starSystem)
+                            )
+                        };
                     break;
             }
         }

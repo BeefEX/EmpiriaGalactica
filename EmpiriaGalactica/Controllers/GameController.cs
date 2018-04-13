@@ -88,11 +88,6 @@ namespace EmpiriaGalactica.Controllers {
         public IViewController CurrentController {
             get => _currentController;
             set {
-                if (_currentController?.GetType() == typeof(OverlayViewController)) {
-                    ((OverlayViewController) _currentController).ChildViewController = value;
-                    return;
-                }
-
                 _currentController?.Dispose();
                 _queue.Add(_currentController);
                 _currentController = value;
