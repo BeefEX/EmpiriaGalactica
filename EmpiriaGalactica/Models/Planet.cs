@@ -42,6 +42,12 @@ namespace EmpiriaGalactica.Models {
         public Empire Owner { get; set; }
         
         /// <summary>
+        /// The amount of energy left each update.
+        /// Unused energy. 
+        /// </summary>
+        public int EnergyAvaliablePerUpdate { get; set; }
+        
+        /// <summary>
         /// The buildings on this planet.
         /// </summary>
         public List<BuildingInstance> Buildings { get; set; }

@@ -39,20 +39,27 @@ namespace EmpiriaGalactica.Managers {
         #region Properties
 
         /// <summary>
+        /// Used to query an resource by a prototype.
+        /// </summary>
+        /// <param name="resource">The prototype of the instance.</param>
+        public ResourceInstance this[Resource resource] => this[resource.InternalName];
+
+        /// <summary>
         /// Used to query an resource by it's internal name.
         /// </summary>
-        /// <param name="resource">Th ename of the resource.</param>
-        public ResourceInstance this[Resource resource] {
+        /// <param name="name">The name of the resource.</param>
+        public ResourceInstance this[string name] {
             get {
                 // Creating a resource instance if we doesn't have one already
-                if (!_resources.ContainsKey(resource.InternalName))
-                    _resources.Add(resource.InternalName, new ResourceInstance {
-                        SourceResource = resource,
+                if (!_resources.ContainsKey(name))
+                    _resources.Add(name, new ResourceInstance {
+                        SourceResource = EmpiriaGalactica.Resources[name],
                         Amount = 0
                     });
                 
-                return _resources[resource.InternalName];
+                return _resources[name];
             }
+            set => _resources[name] = value;
         }
 
         #endregion

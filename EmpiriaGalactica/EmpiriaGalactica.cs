@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Managers;
 using EmpiriaGalactica.Models;
@@ -17,27 +18,144 @@ namespace EmpiriaGalactica {
             Buildings = new InstanceManager<Building>();
             
             Buildings.RegisterItems(
+                
+                // Sources
                 new Building {
                     Name = "Mine",
-                    InternalName = "mine1",
-                    BaseCost = new List<ResourceInstance>(),
-                    Update = planet => planet.Pupulation += 10
+                    InternalName = "building/mine",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 100
+                        }
+                    },
+                    Update = (planet, instance) => planet.Owner.Resources["resource/ore"] += 25 * instance.Level
                 },
                 new Building {
-                    Name = "Minedsadsads",
-                    InternalName = "mine2",
-                    BaseCost = new List<ResourceInstance>(),
-                    Update = planet => planet.Pupulation += 20
+                    Name = "Oil field",
+                    InternalName = "building/oilfield",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 350
+                        }
+                    },
+                    Update = (planet, instance) => planet.Owner.Resources["resource/oil"] += 15 * instance.Level
+                },
+                
+                // Processing
+                new Building {
+                    Name = "Smelter",
+                    InternalName = "building/smelter",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 125
+                        }
+                    },
+                    Update = (planet, instance) => {
+                        var resources = planet.Owner.Resources;
+                        
+                        var ore = resources["resource/ore"].Amount % (25 * instance.Level);
+
+                        resources["resource/ore"] -= ore;
+                        resources["resource/metal"] += (int) Math.Floor(ore / 2f);
+                    }
                 },
                 new Building {
-                    Name = "Minedasdasdasdsad",
-                    InternalName = "mine3",
-                    BaseCost = new List<ResourceInstance>(),
-                    Update = planet => planet.Pupulation += 30
+                    Name = "Oil rafinery",
+                    InternalName = "building/refinery",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 550
+                        }
+                    },
+                    Update = (planet, instance) => {
+                        var resources = planet.Owner.Resources;
+                        
+                        var oil = resources["resource/oil"].Amount % (10 * instance.Level);
+
+                        resources["resource/oil"] -= oil;
+                        resources["resource/fuel"] += (int) Math.Floor(oil / 4f);
+                    }
+                },
+                
+                // Factories
+                new Building {
+                    Name = "Fighter factory",
+                    InternalName = "building/fighterfactory",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 425
+                        }
+                    },
+                    Update = (planet, instance) => {
+                        var resources = planet.Owner.Resources;
+
+                        var metal = resources["resource/metal"].Amount / (50 / instance.Level);
+                        var fuel = resources["resource/fuel"].Amount / (15 / instance.Level);
+
+                        if (metal < 1 || fuel < 1)
+                            return;
+
+                        resources["resource/metal"] -= 50 / instance.Level;
+                        resources["resource/fuel"] -= 15 / instance.Level;
+                        
+                        Console.WriteLine("fighter built ...");
+                    }
                 }
+                
+                /*, // Unused for now
+                new Building {
+                    Name = "Solar power plant",
+                    InternalName = "building/solarpowerplant",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 100
+                        }
+                    },
+                    Update = (planet, instance) => { }
+                },
+                new Building {
+                    Name = "Nuclear power plant",
+                    InternalName = "building/nuclearpowerplant",
+                    BaseCost = new List<ResourceInstance> {
+                        new ResourceInstance {
+                            SourceResource = Resources["resource/metal"],
+                            Amount = 500
+                        }
+                    },
+                    Update = (planet, instance) => { }
+                }*/
             );
             
             Resources = new InstanceManager<Resource>();
+            
+            Resources.RegisterItems(
+                new Resource {
+                    Name = "Ore",
+                    BaseCost = 10,
+                    InternalName = "resource/ore"
+                },
+                new Resource {
+                    Name = "Metal",
+                    BaseCost = 10,
+                    InternalName = "resource/metal"
+                },
+                new Resource {
+                    Name = "Oil",
+                    BaseCost = 10,
+                    InternalName = "resource/oil"
+                },
+                new Resource {
+                    Name = "Fuel",
+                    BaseCost = 10,
+                    InternalName = "resource/fuel"
+                });
+            
             GameController = new GameController();
         }
     }

@@ -33,7 +33,7 @@ namespace EmpiriaGalactica.Controllers {
 
         /// <inheritdoc />
         public void Update() {
-            _planet.Buildings[0].SourceBuilding.Update.Invoke(_planet);
+            _planet.Buildings.ForEach(instance => instance.SourceBuilding.Update.Invoke(_planet, instance));
         }
 
         /// <inheritdoc />

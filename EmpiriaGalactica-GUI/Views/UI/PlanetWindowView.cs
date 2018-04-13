@@ -19,37 +19,64 @@ namespace EmpiriaGalactica_GUI.Views.UI {
         }
         
         public override void Update() {
-            ImGui.BeginWindow($"Planet - {Model.Name}",
-                ref _opened,
-                WindowFlags.AlwaysAutoResize |
-                WindowFlags.NoSavedSettings);
             
-            ImGui.Text($"Planet name: {Model.Name}");
-            ImGui.Text($"Planet biome: {Model.Biome}");
-            ImGui.Separator();
-            ImGui.Text($"Planet population: {Model.Pupulation}");
-            ImGui.Text($"Planet emperor: {Model.Owner.Name}");
+            ImGui.PushStyleVar(StyleVar.WindowMinSize, new Vector2(450, 220));
             
-            ImGui.Separator();
+            // Create a window
+            ImGui.BeginWindow($"Planet - {Model.Name}", ref _opened, WindowFlags.NoSavedSettings);
+            
+            // Create columns
+            ImGui.Columns(3, "windowCols", true);
+
+            // Column labels
+            ImGui.Text("Planet information:");
+            ImGui.NextColumn();
+            
+            ImGui.Text("Units:");
+            ImGui.NextColumn();
             
             ImGui.Text("Buildings:");
+            ImGui.NextColumn();
+            ImGui.Separator();
             
-            ImGui.PopStyleColor();
+            
+            // First column
+            ImGui.BeginChild("##info");
+            
+            ImGui.Text("Planet name:");
+            ImGui.Text(Model.Name);
+            ImGui.Separator();
+            
+            ImGui.Text("Planet biome:");
+            ImGui.Text(Model.Biome.ToString());
+            ImGui.Separator();
+            
+            ImGui.Text("Planet population:");
+            ImGui.Text(Model.Pupulation.ToString());
+            ImGui.Separator();
+            
+            ImGui.Text("Planet emperor:");
+            ImGui.Text(Model.Owner.Name);
+            
+            ImGui.EndChild();
+            ImGui.NextColumn();
 
-            if (ImGui.CollapsingHeader("Built", TreeNodeFlags.CollapsingHeader)) {
+            
+            // Second column
+            ImGui.BeginChild("##buildings");
+
+            if (ImGui.CollapsingHeader("Built", "bui", true, true)) {
                 for (var i = 0; i < Model.Buildings.Count; i++) {
                     var buildingInstance = Model.Buildings[i];
                     ImGui.Text(buildingInstance.SourceBuilding.Name);
 
-                    ImGui.SameLine(ImGui.GetWindowWidth() - 120);
-
-                    if (ImGui.Button($"Destroy##d{i}", new Vector2(100, 10))) {
+                    if (ImGui.Button($"Destroy##d{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 10))) {
                         Controller.OnCommand(new Command("DestroyBuilding", buildingInstance));
                     }
                 }
             }
 
-            if (ImGui.CollapsingHeader("Avaliable", TreeNodeFlags.CollapsingHeader)) {
+            if (ImGui.CollapsingHeader("Avaliable", "ava", true, true)) {
                 var buildings = new List<Building>(global::EmpiriaGalactica.EmpiriaGalactica.Buildings.RegisteredItems);
 
                 buildings.RemoveAll(building => {
@@ -69,15 +96,26 @@ namespace EmpiriaGalactica_GUI.Views.UI {
                     var buildingInstance = buildings[i];
                     ImGui.Text(buildingInstance.Name);
 
-                    ImGui.SameLine(ImGui.GetWindowWidth() - 120);
-
-                    if (ImGui.Button($"Build##b{i}", new Vector2(100, 10))) {
+                    if (ImGui.Button($"Build##b{i}", new Vector2(ImGui.GetContentRegionAvailableWidth(), 10))) {
                         Controller.OnCommand(new Command("BuildBuilding", buildingInstance));
                     }
                 }
             }
             
+            ImGui.EndChild();
+            
+            ImGui.NextColumn();
+            
+            
+            
+            // Third column
+            ImGui.BeginChild("##units");
+            
+            ImGui.EndChild();
+            
             ImGui.EndWindow();
+            
+            ImGui.PopStyleVar();
         }
 
         public override void Dispose() { }

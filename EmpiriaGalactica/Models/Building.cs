@@ -19,9 +19,23 @@ namespace EmpiriaGalactica.Models {
         /// </summary>
         public List<ResourceInstance> BaseCost { get; set; }
         
+        /*
+        // Unused for now
+        
+        /// <summary>
+        /// The amount of energy required by this building each update.
+        /// </summary>
+        public int EnergyRequiredPerUpdate { get; set; }
+        
+        /// <summary>
+        /// The amount of energy supplied by this building each update.
+        /// </summary>
+        public int EnergySuppliedPerUpdate { get; set; }
+        */
+        
         /// <summary>
         /// Used to update the building and apply it's effects.
         /// </summary>
-        public Action<Planet> Update { get; set; }
+        public Action<Planet, BuildingInstance> Update { get; set; }
     }
 }

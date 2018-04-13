@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Numerics;
@@ -48,6 +48,10 @@ namespace EmpiriaGalactica_GUI.Views {
         public StarSystemView(IController controller, StarSystem model) : base(controller, model) { }
         
         public override void Update() {
+            ImGui.PushStyleColor(ColorTarget.Button, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonHovered, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonActive, Vector4.Zero);
+            
             int perPlanet = EmpiriaGalactica.Window.Width / (Model.Planets.Count + 1);
             int height = EmpiriaGalactica.Window.Height / 2 - 25;
             
@@ -112,6 +116,8 @@ namespace EmpiriaGalactica_GUI.Views {
 
                 ImGui.EndWindow();
             }
+            
+            ImGui.PopStyleColor(3);
         }
 
         public override void Dispose() {

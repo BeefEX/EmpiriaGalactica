@@ -47,6 +47,10 @@ namespace EmpiriaGalactica_GUI.Views {
         /// <inheritdoc />
         public override void Update() {
             var i = 0;
+            
+            ImGui.PushStyleColor(ColorTarget.Button, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonHovered, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonActive, Vector4.Zero);
 
             StarSystem hovered = null;
             
@@ -76,9 +80,6 @@ namespace EmpiriaGalactica_GUI.Views {
                     Vector4.Zero,
                     Vector4.One);
                 
-                ImGui.PushStyleColor(ColorTarget.Button, Vector4.Zero);
-                ImGui.PushStyleColor(ColorTarget.ButtonHovered, Vector4.Zero);
-                ImGui.PushStyleColor(ColorTarget.ButtonActive, Vector4.Zero);
 
                 if (ImGui.IsItemHovered(HoveredFlags.Default))
                     hovered = starSystem;
@@ -86,7 +87,9 @@ namespace EmpiriaGalactica_GUI.Views {
                 if (clicked)
                     Controller.OnCommand(new Command("Click", starSystem));
                 
+                
                 ImGui.EndWindow();
+                
                 i++;
             }
 
@@ -94,6 +97,8 @@ namespace EmpiriaGalactica_GUI.Views {
                 Controller.OnCommand(new Command("HoverStart", hovered));
             else
                 Controller.OnCommand(new Command("HoverEnd"));
+            
+            ImGui.PopStyleColor(3);
         }
 
         /// <inheritdoc />
