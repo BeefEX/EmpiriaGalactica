@@ -1,9 +1,10 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
+using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Managers;
 using EmpiriaGalactica.Models;
 using ImGuiNET;
-using OpenTK.Graphics.OpenGL;
 
 namespace EmpiriaGalactica_GUI.Views.UI {
     
@@ -16,13 +17,17 @@ namespace EmpiriaGalactica_GUI.Views.UI {
             
         }
 
-        public override unsafe void Update() {
+        public override void Update() {
+            
+            // Top bad
             ImGui.SetNextWindowSize(new Vector2(EmpiriaGalactica.Window.Width, 20), Condition.Always);
             ImGui.SetNextWindowPos(Vector2.Zero, Condition.Always, Vector2.Zero);
             
             ImGui.PushStyleVar(StyleVar.WindowRounding, 0f);
             
             ImGui.PushStyleVar(StyleVar.WindowPadding, new Vector2(4));
+            
+            ImGui.PushStyleColor(ColorTarget.WindowBg, new Vector4(0, 0, 0, 1));
             
             ImGui.BeginWindow("overlay",
                 WindowFlags.NoCollapse |
@@ -32,14 +37,14 @@ namespace EmpiriaGalactica_GUI.Views.UI {
                 WindowFlags.NoTitleBar |
                 WindowFlags.NoResize);
             
-            if (ImGui.Button("Back##menu00000")) {
-                global::EmpiriaGalactica.EmpiriaGalactica.GameController.PopBack();
-            }
+            if (ImGui.Button("Back##menu00000"))
+                Controller.OnCommand(new Command("clickBack"));
             
             ImGui.EndWindow();
 
-            ImGui.SetNextWindowPos(new Vector2(0, EmpiriaGalactica.Window.Height - 200), Condition.Always, Vector2.Zero);
             
+            // Resources window
+            ImGui.SetNextWindowPos(new Vector2(0, EmpiriaGalactica.Window.Height - 200), Condition.Always, Vector2.Zero);
             ImGui.SetNextWindowSize(new Vector2(100, 200), Condition.Always);
 
             ImGui.BeginWindow("Resources:",
@@ -64,14 +69,39 @@ namespace EmpiriaGalactica_GUI.Views.UI {
             
             ImGui.EndWindow();
             
-            ImGui.PopStyleVar(2);
             
+            // End turn window
+            ImGui.PushStyleVar(StyleVar.WindowPadding, Vector2.Zero);
+            
+            ImGui.SetNextWindowPos(
+                new Vector2(
+                    EmpiriaGalactica.Window.Width - 100,
+                    EmpiriaGalactica.Window.Height - 100),
+                Condition.Always,
+                Vector2.Zero);
+            
+            ImGui.SetNextWindowSize(new Vector2(100, 100), Condition.Always);
+
+            ImGui.BeginWindow("nextturn",
+                WindowFlags.NoCollapse |
+                WindowFlags.NoFocusOnAppearing |
+                WindowFlags.NoMove |
+                WindowFlags.NoScrollbar |
+                WindowFlags.NoResize |
+                WindowFlags.NoTitleBar);
+
+            if (ImGui.Button("Next turn", new Vector2(100, 100)))
+                Controller.OnCommand(new Command("nextTurn"));
+            
+            ImGui.EndWindow();
+            
+            // Styling reset
+            ImGui.PopStyleVar(3);
+            ImGui.PopStyleColor();
             ImGui.PushStyleVar(StyleVar.WindowRounding, 7f);
         }
 
-        public override void Dispose() {
-            
-        }
+        public override void Dispose() { }
 
         #endregion
     }

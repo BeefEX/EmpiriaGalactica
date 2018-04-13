@@ -44,7 +44,13 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
 
         /// <inheritdoc />
         public void OnCommand(Command command) {
-            
+            switch (command.Label) {
+                case "clickBack":
+                    EmpiriaGalactica.GameController.PopBack();
+                    break;
+                case "nextTurn":
+                    break;
+            }
         }
         
         #endregion
