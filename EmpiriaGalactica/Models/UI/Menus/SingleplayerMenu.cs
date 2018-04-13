@@ -58,7 +58,7 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                             }
                         }
 
-                        var game = new Galaxy {
+                        var galaxy = new Galaxy {
                             Name = "Test galaxy",
                             Empires = new List<Empire>(new[] {
                                 emp
@@ -66,9 +66,18 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                             StarSystems = sys
                         };
 
-                        var galaxyController = new GalaxyController(game);
+                        var galaxyController = new GalaxyController(galaxy);
 
-                        EmpiriaGalactica.GameController.CurrentController = new GalaxyViewController(galaxyController);
+                        var game = new Game {
+                            CurrentPlayer = emp,
+                            CurrentTurn = 0,
+                            Galaxy = galaxy
+                        };
+                        
+                        var controller = new OverlayViewController(game);
+                        controller.ChildViewController = new GalaxyViewController(galaxyController);
+
+                        EmpiriaGalactica.GameController.CurrentController = controller;
                     }
                 },
                 new Button {

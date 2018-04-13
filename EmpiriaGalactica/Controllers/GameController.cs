@@ -12,9 +12,20 @@ namespace EmpiriaGalactica.Controllers {
 
         #region Members
         
-        private IController _currentController;
+        /// <summary>
+        /// The currently active view controller.
+        /// </summary>
+        private IViewController _currentController;
 
-        private List<IController> _queue;
+        /// <summary>
+        /// Queue of inactive controllers to allow <see cref="PopBack"/> method. 
+        /// </summary>
+        private List<IViewController> _queue;
+
+        /// <summary>
+        /// The game this controller is controlling.
+        /// </summary>
+        private Game _game;
         
         #endregion
         
@@ -25,7 +36,7 @@ namespace EmpiriaGalactica.Controllers {
         }
 
         public void Init() {
-            _queue = new List<IController>();
+            _queue = new List<IViewController>();
             
             CurrentController = new MenuViewController(new MainMenu());
         }
@@ -71,9 +82,17 @@ namespace EmpiriaGalactica.Controllers {
 
         #region Properties
         
-        public IController CurrentController {
+        /// <summary>
+        /// Used to push a new controller onto the stack.
+        /// </summary>
+        public IViewController CurrentController {
             get => _currentController;
             set {
+                if (_currentController?.GetType() == typeof(OverlayViewController)) {
+                    ((OverlayViewController) _currentController).ChildViewController = value;
+                    return;
+                }
+
                 _currentController?.Dispose();
                 _queue.Add(_currentController);
                 _currentController = value;
@@ -81,11 +100,20 @@ namespace EmpiriaGalactica.Controllers {
             }
         }
 
+        /// <summary>
+        /// The game this controller is controlling.
+        /// </summary>
+        public Game Game {
+            get => _game;
+            set => _game = value;
+        }
+
+        /// <inheritdoc />
         public bool HasParent => false;
+
+        /// <inheritdoc />
         public IController Parent => null;
 
         #endregion
     }
-
-    public class FullScreenViewController : Attribute {  }
 }
