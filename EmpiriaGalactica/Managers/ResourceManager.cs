@@ -29,9 +29,9 @@ namespace EmpiriaGalactica.Managers {
         /// <summary>
         /// Used to remove an resource from the list.
         /// </summary>
-        /// <param name="name">The internal name of the resource to clear.</param>
-        public void ClearResource(string name) {
-            _resources.Remove(name);
+        /// <param name="resource">The internal name of the resource to clear.</param>
+        public void ClearResource(Resource resource) {
+            _resources.Remove(resource.InternalName);
         }
         
         #endregion
@@ -41,8 +41,19 @@ namespace EmpiriaGalactica.Managers {
         /// <summary>
         /// Used to query an resource by it's internal name.
         /// </summary>
-        /// <param name="name">Th ename of the resource.</param>
-        public ResourceInstance this[string name] => _resources[name];
+        /// <param name="resource">Th ename of the resource.</param>
+        public ResourceInstance this[Resource resource] {
+            get {
+                // Creating a resource instance if we doesn't have one already
+                if (!_resources.ContainsKey(resource.InternalName))
+                    _resources.Add(resource.InternalName, new ResourceInstance {
+                        SourceResource = resource,
+                        Amount = 0
+                    });
+                
+                return _resources[resource.InternalName];
+            }
+        }
 
         #endregion
     }

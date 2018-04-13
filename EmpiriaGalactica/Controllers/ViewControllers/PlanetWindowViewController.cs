@@ -30,6 +30,9 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
         /// <inheritdoc />
         public void Update() {
             _planetWindowView.Update();
+            
+            if (!_planetWindowView.Opened)
+                _parentViewController.OnCommand(new Command("WindowClosed"));
         }
 
         /// <inheritdoc />
@@ -38,7 +41,9 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
         }
 
         /// <inheritdoc />
-        public void OnCommand(Command command) { }
+        public void OnCommand(Command command) {
+            ((StarSystemController) _parentViewController.Parent).GetController(_planet).OnCommand(command);
+        }
         
         #endregion
 

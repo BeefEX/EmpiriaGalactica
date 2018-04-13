@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using EmpiriaGalactica.Controllers.UI;
+using EmpiriaGalactica.Controllers;
+using EmpiriaGalactica.Controllers.ViewControllers;
 
 namespace EmpiriaGalactica.Models.UI.Menus {
     
@@ -9,9 +10,8 @@ namespace EmpiriaGalactica.Models.UI.Menus {
             Buttons = new List<Button>(new [] {
                 new Button {
                     Title = "Play",
-                    /*
                     OnClick = () =>
-                        //EmpiriaGalactica.GameController.CurrentController = new MenuController(new PlayMenu())*/
+                        EmpiriaGalactica.GameController.CurrentController = new MenuViewController(new PlayMenu())
                 },
                 new Button {
                     Title = "Settings"

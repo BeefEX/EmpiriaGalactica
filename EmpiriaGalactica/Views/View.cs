@@ -3,11 +3,37 @@ using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Views {
+
+    public interface IView {
+        
+        #region Methods
+        
+        /// <summary>
+        /// Used to update the view.
+        /// </summary>
+        void Update();
+
+        /// <summary>
+        /// Used to dispose the view.
+        /// </summary>
+        void Dispose();
+        
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// The controller this View will report to.
+        /// </summary>
+        IController Controller { get; set; }
+        
+        #endregion
+    }
     
     /// <summary>
     /// Contains all logic related to rendering a single object.
     /// </summary>
-    public abstract class View<TModel> where TModel : IModel {
+    public abstract class View<TModel> : IView where TModel : IModel {
 
         #region Members
         
@@ -35,23 +61,17 @@ namespace EmpiriaGalactica.Views {
             _model = model;
         }
 
-        /// <summary>
-        /// Used to update the view.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void Update();
 
-        /// <summary>
-        /// Used to dispose the view.
-        /// </summary>
+        /// <inheritdoc />
         public abstract void Dispose();
         
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// The controller this View will report to.
-        /// </summary>
+        /// <inheritdoc />
         public IController Controller {
             get => _controller;
             set => _controller = value;

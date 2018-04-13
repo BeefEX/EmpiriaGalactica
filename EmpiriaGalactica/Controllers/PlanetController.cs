@@ -40,7 +40,48 @@ namespace EmpiriaGalactica.Controllers {
         public void Dispose() { }
 
         /// <inheritdoc />
-        public void OnCommand(Command command) { }
+        public void OnCommand(Command command) {
+            switch (command.Label) {
+                case "BuildBuilding":
+                    var building = (Building) command.Parameters[0];
+
+                    if (building == null)
+                        return;
+                    
+                    var canBuild = true;
+                    
+                    building.BaseCost.ForEach(instance => {
+                        if (!canBuild)
+                            return;
+
+                        canBuild = _planet.Owner.Resources[instance.SourceResource].Amount >= instance.Amount;
+                    });
+                    
+                    if (!canBuild)
+                        return;
+                    
+                    _planet.Buildings.Add(new BuildingInstance {
+                        SourceBuilding = building,
+                        Level = 1
+                    });
+                    
+                    break;
+                case "DestroyBuilding":
+                    var buildingInstance = (BuildingInstance) command.Parameters[0];
+                    
+                    if (!_planet.Buildings.Contains(buildingInstance))
+                        return;
+                    
+                    buildingInstance.SourceBuilding.BaseCost.ForEach(resource => {
+                        _planet.Owner.Resources[resource.SourceResource].Amount +=
+                            resource.Amount / 2 * buildingInstance.Level;
+                    });
+
+                    _planet.Buildings.Remove(buildingInstance);
+                    
+                    break;
+            }
+        }
 
         #endregion
         

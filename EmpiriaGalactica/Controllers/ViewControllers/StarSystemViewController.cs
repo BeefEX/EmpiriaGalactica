@@ -38,6 +38,7 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
         public void Update() {
             _starSystemView.Update();
             
+            
             _planetWindowViewController?.Update();
         }
 
@@ -55,6 +56,10 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
                     _planetWindowViewController?.Dispose();
             
                     _planetWindowViewController = new PlanetWindowViewController((Planet) command.Parameters[0], this);        
+                    break;
+                case "WindowClosed":
+                    _planetWindowViewController?.Dispose();
+                    _planetWindowViewController = null;
                     break;
             }
         }

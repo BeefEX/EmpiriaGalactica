@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using EmpiriaGalactica.Commands;
-using EmpiriaGalactica.Controllers.UI;
 using EmpiriaGalactica.Controllers.ViewControllers;
 using EmpiriaGalactica.Managers;
 using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Models.UI.Menus;
-using EmpiriaGalactica.Views;
 
 namespace EmpiriaGalactica.Controllers {
     
@@ -29,65 +27,7 @@ namespace EmpiriaGalactica.Controllers {
         public void Init() {
             _queue = new List<IController>();
             
-            var emp = new Empire {
-                Name = "Test empire"
-            };
-            
-            var sys = new StarSystemManager();
-            for (int x = 0; x < 16; x++) {
-                for (int y = 0; y < 16; y++) {
-                    sys.RegisterItems(new StarSystem {
-                        Position = new Vector(x, y),
-                        Name = "test name - " + x + "-" + y,
-                        Planets = new List<Planet>(new [] {
-                            new Planet {
-                                Name = "test",
-                                Biome = Planet.PlanetBiome.Humid,
-                                Buildings = new List<BuildingInstance>(),
-                                Pupulation = 15400,
-                                Radius = 50,
-                                Owner = emp
-                            },
-                            new Planet {
-                                Name = "test",
-                                Biome = Planet.PlanetBiome.Humid,
-                                Buildings = new List<BuildingInstance>(),
-                                Pupulation = 15400,
-                                Radius = 50,
-                                Owner = emp
-                            },
-                            new Planet {
-                                Name = "test",
-                                Biome = Planet.PlanetBiome.Humid,
-                                Buildings = new List<BuildingInstance>(),
-                                Pupulation = 15400,
-                                Radius = 50,
-                                Owner = emp
-                            },
-                            new Planet {
-                                Name = "test",
-                                Biome = Planet.PlanetBiome.Humid,
-                                Buildings = new List<BuildingInstance>(),
-                                Pupulation = 15400,
-                                Radius = 50,
-                                Owner = emp
-                            }
-                        })
-                    });
-                }
-            }
-
-            var game = new Galaxy {
-                Name = "Test galaxy",
-                Empires = new List<Empire>(new[] {
-                    emp
-                }),
-                StarSystems = sys
-            };
-            
-            var galaxyController = new GalaxyController(game);
-
-            CurrentController = new GalaxyViewController(galaxyController);
+            CurrentController = new MenuViewController(new MainMenu());
         }
 
         public void Update() {

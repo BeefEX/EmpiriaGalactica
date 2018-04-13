@@ -2,11 +2,10 @@
 using EmpiriaGalactica.Commands;
 
 namespace EmpiriaGalactica.Controllers {
-    
     /// <summary>
     /// The controller part of MVC.
     /// </summary>
-    /// <inheritdoc />
+    /// <inheritdoc cref="ICommandable" />
     public interface IController : IDisposable, ICommandable {
 
         #region Methods
