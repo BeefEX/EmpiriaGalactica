@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EmpiriaGalactica.Models;
 
 namespace EmpiriaGalactica.Managers {
@@ -33,7 +34,15 @@ namespace EmpiriaGalactica.Managers {
         public void ClearResource(Resource resource) {
             _resources.Remove(resource.InternalName);
         }
-        
+
+        /// <summary>
+        /// Used to check if all the provided resources are stored in here.
+        /// </summary>
+        /// <param name="resources">The resources to check for.</param>
+        /// <returns>If all provided resources are avaliable.</returns>
+        public bool HasAllResources(IEnumerable<ResourceInstance> resources) =>
+            resources.All(instance => this[instance.SourceResource].Amount >= instance.Amount);
+
         #endregion
 
         #region Properties
@@ -50,7 +59,7 @@ namespace EmpiriaGalactica.Managers {
         /// <param name="name">The name of the resource.</param>
         public ResourceInstance this[string name] {
             get {
-                // Creating a resource instance if we doesn't have one already
+                // Creating a resource instance if we don't have one already
                 if (!_resources.ContainsKey(name))
                     _resources.Add(name, new ResourceInstance {
                         SourceResource = EmpiriaGalactica.Resources[name],
@@ -61,6 +70,7 @@ namespace EmpiriaGalactica.Managers {
             }
             set => _resources[name] = value;
         }
+        
 
         /// <summary>
         /// The resources stored here.

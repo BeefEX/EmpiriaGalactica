@@ -1,5 +1,4 @@
-﻿using System;
-using System.Numerics;
+﻿using System.Numerics;
 using EmpiriaGalactica.Commands;
 using EmpiriaGalactica.Controllers;
 using EmpiriaGalactica.Managers;
@@ -13,9 +12,7 @@ namespace EmpiriaGalactica_GUI.Views.UI {
         
         #region Methods
         
-        public OverlayView(IController controller, Game model) : base(controller, model) {
-            
-        }
+        public OverlayView(IController controller, Game model) : base(controller, model) { }
 
         public override void Update() {
             
@@ -37,8 +34,24 @@ namespace EmpiriaGalactica_GUI.Views.UI {
                 WindowFlags.NoTitleBar |
                 WindowFlags.NoResize);
             
+            ImGui.Columns(3, "topbar", false);
+            
             if (ImGui.Button("Back##menu00000"))
                 Controller.OnCommand(new Command("clickBack"));
+            
+            ImGui.NextColumn();
+            
+            ImGui.PushStyleColor(ColorTarget.Button, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonHovered, Vector4.Zero);
+            ImGui.PushStyleColor(ColorTarget.ButtonActive, Vector4.Zero);
+            
+            ImGui.Button($"Current player: {Model.CurrentPlayer.Name}", ImGui.GetContentRegionAvailable());
+            ImGui.NextColumn();
+            
+            ImGui.SameLine(ImGui.GetContentRegionAvailableWidth() - 120);
+            ImGui.Button($"Current turn: {Model.CurrentTurn}", new Vector2(120, ImGui.GetContentRegionAvailable().Y));
+            
+            ImGui.PopStyleColor(3);
             
             ImGui.EndWindow();
 

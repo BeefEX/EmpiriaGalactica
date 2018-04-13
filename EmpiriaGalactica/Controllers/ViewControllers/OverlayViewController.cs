@@ -49,6 +49,7 @@ namespace EmpiriaGalactica.Controllers.ViewControllers {
                     EmpiriaGalactica.GameController.PopBack();
                     break;
                 case "nextTurn":
+                    EmpiriaGalactica.GameController.OnCommand(new Command("nextTurn"));
                     break;
             }
         }

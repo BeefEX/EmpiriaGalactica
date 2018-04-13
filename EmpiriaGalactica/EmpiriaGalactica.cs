@@ -80,8 +80,10 @@ namespace EmpiriaGalactica {
                     },
                     Update = (planet, instance) => {
                         var resources = planet.Owner.Resources;
+
+                        var needed = 25 * instance.Level;
                         
-                        var ore = resources["resource/ore"].Amount % (25 * instance.Level);
+                        var ore = resources["resource/ore"].Amount > needed? needed:  resources["resource/ore"].Amount;
 
                         resources["resource/ore"] -= ore;
                         resources["resource/metal"] += (int) Math.Floor(ore / 2f);
@@ -98,8 +100,10 @@ namespace EmpiriaGalactica {
                     },
                     Update = (planet, instance) => {
                         var resources = planet.Owner.Resources;
+
+                        var needed = 10 * instance.Level;
                         
-                        var oil = resources["resource/oil"].Amount % (10 * instance.Level);
+                        var oil = resources["resource/oil"].Amount > needed? needed:  resources["resource/oil"].Amount;
 
                         resources["resource/oil"] -= oil;
                         resources["resource/fuel"] += (int) Math.Floor(oil / 4f);

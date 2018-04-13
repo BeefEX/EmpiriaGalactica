@@ -45,19 +45,7 @@ namespace EmpiriaGalactica.Controllers {
                 case "BuildBuilding":
                     var building = (Building) command.Parameters[0];
 
-                    if (building == null)
-                        return;
-                    
-                    var canBuild = true;
-                    
-                    building.BaseCost.ForEach(instance => {
-                        if (!canBuild)
-                            return;
-
-                        canBuild = _planet.Owner.Resources[instance.SourceResource].Amount >= instance.Amount;
-                    });
-                    
-                    if (!canBuild)
+                    if (building == null || !_planet.Owner.Resources.HasAllResources(building.BaseCost))
                         return;
                     
                     building.BaseCost.ForEach(instance => {

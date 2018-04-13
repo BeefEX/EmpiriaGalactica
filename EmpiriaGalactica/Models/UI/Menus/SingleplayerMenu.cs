@@ -82,6 +82,7 @@ namespace EmpiriaGalactica.Models.UI.Menus {
                         };
 
                         EmpiriaGalactica.GameController.Game = game;
+                        EmpiriaGalactica.GameController.GalaxyController = galaxyController;
                         
                         EmpiriaGalactica.GameController.CurrentController = controller;
                     }
