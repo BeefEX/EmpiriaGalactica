@@ -4,7 +4,7 @@ using EmpiriaGalactica.Models.UI;
 using EmpiriaGalactica.Views.UI;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
-    public class MenuViewController : IController {
+    public class MenuViewController : IViewController {
 
         #region Members
 

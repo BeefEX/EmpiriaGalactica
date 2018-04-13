@@ -7,7 +7,7 @@ using EmpiriaGalactica.Views.UI;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
     
-    public class GalaxyViewController : IController {
+    public class GalaxyViewController : IViewController {
         
         #region Members
 

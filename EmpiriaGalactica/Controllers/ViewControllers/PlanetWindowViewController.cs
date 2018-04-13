@@ -4,7 +4,7 @@ using EmpiriaGalactica.Models;
 using EmpiriaGalactica.Views.UI;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
-    class PlanetWindowViewController : IController {
+    public class PlanetWindowViewController : IViewController {
 
         #region Members
 

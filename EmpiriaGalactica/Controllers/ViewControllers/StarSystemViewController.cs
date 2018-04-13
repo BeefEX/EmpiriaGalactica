@@ -5,7 +5,7 @@ using EmpiriaGalactica.Views;
 
 namespace EmpiriaGalactica.Controllers.ViewControllers {
     
-    public class StarSystemViewController : IController {
+    public class StarSystemViewController : IViewController {
         
         #region Members
 
